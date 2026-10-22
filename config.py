@@ -8,7 +8,7 @@ load_dotenv()
 
 # ── Gemini ──────────────────────────────────────────────────────────────────
 GEMINI_API_KEY: str = os.getenv("GEMINI_API_KEY", "")
-GEMINI_MODEL: str = "gemini-1.5-flash"
+GEMINI_MODEL: str = "gemini-2.0-flash"
 
 # ── App ─────────────────────────────────────────────────────────────────────
 APP_TITLE: str = "Smart AI Resume Analyzer & Interview Bot"

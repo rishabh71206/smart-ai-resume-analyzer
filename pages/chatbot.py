@@ -83,7 +83,7 @@ Give a helpful, concise answer.
                     st.write(answer)
                     st.session_state["chat_history"].append({"role": "assistant", "content": answer})
                 except Exception as e:
-                    err = "Sorry, kuch error aayi. Dobara try karo!"
+                    err = f"❌ Error: {str(e)[:100]}. Please check your Gemini API key in Streamlit Secrets!"
                     st.error(err)
                     st.session_state["chat_history"].append({"role": "assistant", "content": err})
 

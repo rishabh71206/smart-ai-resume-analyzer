@@ -16,10 +16,19 @@ def _get_model():
     if not GEMINI_API_KEY:
         raise ValueError(
             "GEMINI_API_KEY is not set. "
-            "Please add it to your .env file."
+            "Please add it to your .env file or Streamlit Secrets."
         )
     genai.configure(api_key=GEMINI_API_KEY)
-    return genai.GenerativeModel(GEMINI_MODEL)
+    # Try gemini-2.0-flash first, fallback to gemini-1.5-flash
+    try:
+        model = genai.GenerativeModel("gemini-2.0-flash")
+        return model
+    except Exception:
+        try:
+            model = genai.GenerativeModel("gemini-1.5-flash")
+            return model
+        except Exception:
+            return genai.GenerativeModel("gemini-pro")
 
 
 # ── Resume Analysis ───────────────────────────────────────────────────────────
