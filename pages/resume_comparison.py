@@ -145,8 +145,7 @@ def render():
             if name in scores:
                 for cat, label in zip(categories, cat_labels):
                     val = scores[name].get(cat, 0)
-                    color = "#22c55e" if val >= 80 else "#eab308" if val >= 60 else "#ef4444"
-                    st.markdown(f"**{label}:** :{val}/100")
+                    st.markdown(f"**{label}:** {val}/100")
                     st.progress(val/100)
 
     # Strengths & Weaknesses
