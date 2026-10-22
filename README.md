@@ -1,132 +1,138 @@
 # 🤖 Smart AI Resume Analyzer & Interview Bot
 
-A full-featured Python + Streamlit application that uses **Google Gemini AI** to analyze resumes, simulate mock interviews, and provide personalized career advice.
+![Python](https://img.shields.io/badge/Python-3.11-blue)
+![Streamlit](https://img.shields.io/badge/Streamlit-1.38-red)
+![Gemini AI](https://img.shields.io/badge/Google-Gemini%20AI-orange)
+![License](https://img.shields.io/badge/License-MIT-green)
+
+## 🌐 Live Demo
+### 👉 [Click Here to Use the App](https://smart-ai-resume-analyzer-nfdlpabrwsiiuvghfphuzv.streamlit.app/)
 
 ---
 
 ## ✨ Features
 
 | Feature | Description |
-|---|---|
-| 📄 **Resume Analyzer** | Deep AI analysis — scores, strengths, weaknesses, ATS check |
-| 🎯 **JD Matching** | Compare your resume against a job description |
-| 🤖 **Interview Bot** | AI-generated interview questions + answer evaluation |
-| 🚀 **Career Advisor** | Personalized roadmap, skill gaps, certifications |
-| 📥 **PDF Report** | Downloadable analysis report |
-| 📚 **Tips & Resources** | Expert resume writing advice and resources |
+|---------|-------------|
+| 📄 **Resume Analyzer** | AI-powered resume scoring with ATS check |
+| 🤖 **Interview Bot** | Mock interview with AI question generation & evaluation |
+| 🚀 **Career Advisor** | Personalized career roadmap & skill gap analysis |
+| 💬 **AI Chatbot** | Ask anything about your resume |
+| 🎯 **Job Recommendations** | AI suggests best job matches |
+| 👥 **Resume Comparison** | Compare 2 resumes side by side |
+| 🎨 **Resume Builder** | Build a professional resume with AI |
+| 📚 **Tips & Resources** | Expert resume writing tips |
+| 🌙 **Dark/Light Mode** | Toggle between themes |
+| 📥 **PDF Report** | Download your analysis as PDF |
 
 ---
 
-## 🛠️ Tech Stack
+## 🚀 How to Use (Online)
 
-- **Python 3.10+**
-- **Streamlit** — web UI
-- **Google Gemini AI** — AI analysis engine
-- **PyPDF2 / python-docx** — resume parsing
-- **Plotly** — interactive charts
-- **fpdf2** — PDF report generation
-- **python-dotenv** — environment management
+1. Go to → **[Live App](https://smart-ai-resume-analyzer-nfdlpabrwsiiuvghfphuzv.streamlit.app/)**
+2. Upload your resume (PDF, DOCX, or TXT)
+3. Click **"Analyze Resume"**
+4. Get instant AI-powered feedback!
 
 ---
 
-## 🚀 Quick Start
+## 💻 Run Locally
 
-### 1. Clone / Open the project
+### 1. Clone the repository
 ```bash
-cd "PROJECT   Smart AI Resume Analyzer & Interview Bot"
+git clone https://github.com/rishabh71206/smart-ai-resume-analyzer.git
+cd smart-ai-resume-analyzer
 ```
 
-### 2. Create a virtual environment
-```bash
-python -m venv venv
-
-# Windows
-venv\Scripts\activate
-
-# macOS/Linux
-source venv/bin/activate
-```
-
-### 3. Install dependencies
+### 2. Install dependencies
 ```bash
 pip install -r requirements.txt
 ```
 
-### 4. Configure your API key
+### 3. Get a FREE Gemini API Key
+- Go to → **https://aistudio.google.com/app/apikey**
+- Click **"Create API Key"**
+- Copy the key
+
+### 4. Create .env file
 ```bash
-# Copy the example env file
-copy .env.example .env      # Windows
-cp .env.example .env        # macOS/Linux
-
-# Edit .env and add your key:
-# GEMINI_API_KEY=your_google_gemini_api_key_here
+cp .env.example .env
 ```
-
-> **Get a free Gemini API key:** https://aistudio.google.com/
+Add your key:
+```
+GEMINI_API_KEY=your_gemini_api_key_here
+```
 
 ### 5. Run the app
 ```bash
 streamlit run app.py
 ```
 
-The app will open at **http://localhost:8501**
+App opens at → **http://localhost:8501**
+
+---
+
+## 🛠️ Tech Stack
+
+| Technology | Purpose |
+|------------|---------|
+| Python 3.11 | Core language |
+| Streamlit | Web UI |
+| Google Gemini AI | AI analysis engine |
+| PyPDF2 | PDF parsing |
+| python-docx | DOCX parsing |
+| Plotly | Interactive charts |
+| fpdf2 | PDF report generation |
+| pandas | Data handling |
 
 ---
 
 ## 📁 Project Structure
 
 ```
-├── app.py                    # Main Streamlit entry point
-├── config.py                 # Central configuration
-├── requirements.txt          # Python dependencies
-├── .env.example              # Environment template
+├── app.py                      # Main entry point
+├── config.py                   # Configuration
+├── requirements.txt            # Dependencies
 ├── pages/
-│   ├── resume_analyzer.py    # Resume analysis page
-│   ├── interview_bot.py      # Mock interview page
-│   ├── career_advisor.py     # Career roadmap page
-│   └── tips_resources.py     # Tips & resources page
+│   ├── resume_analyzer.py      # Resume analysis
+│   ├── interview_bot.py        # Mock interview
+│   ├── career_advisor.py       # Career roadmap
+│   ├── chatbot.py              # AI chatbot
+│   ├── job_recommendations.py  # Job matching
+│   ├── resume_comparison.py    # Resume comparison
+│   ├── resume_builder.py       # Resume builder
+│   └── tips_resources.py       # Tips & resources
 └── utils/
-    ├── resume_parser.py      # PDF/DOCX/TXT parser
-    ├── ai_engine.py          # Gemini AI wrapper
-    ├── scorer.py             # Local scoring utilities
-    └── pdf_report.py         # PDF report generator
+    ├── resume_parser.py        # Document parser
+    ├── ai_engine.py            # Gemini AI wrapper
+    ├── scorer.py               # Scoring logic
+    └── pdf_report.py           # PDF generator
 ```
 
 ---
 
-## 📸 Pages Overview
+## 🤝 Contributing
 
-### 📄 Resume Analyzer
-- Upload PDF, DOCX, or TXT resume
-- Optionally paste a Job Description for targeted analysis
-- Get an **Overall Score**, **ATS Score**, section breakdown radar chart, skills gap analysis, actionable suggestions, and a downloadable PDF report
+Contributions are welcome!
 
-### 🤖 Interview Bot
-- Select job role, difficulty (Easy/Medium/Hard/Mixed), and number of questions
-- Choose question types: Behavioral, Technical, Situational, HR
-- Answer questions and get AI evaluation with score, grade, feedback, and model answers
-- Final performance dashboard with per-question scores
-
-### 🚀 Career Advisor
-- Get your current level assessed (Junior → Executive)
-- See your fit percentage for the target role
-- Prioritized skill gap list with learning resources
-- Recommended certifications and an interactive action plan checklist
-
-### 📚 Tips & Resources
-- Expandable expert tips for each resume section
-- Curated platform and tool links
-- Interactive resume checklist
+1. Fork the repo
+2. Create a new branch: `git checkout -b feature/your-feature`
+3. Make changes and commit: `git commit -m "Add your feature"`
+4. Push: `git push origin feature/your-feature`
+5. Open a Pull Request
 
 ---
 
-## ⚙️ Configuration
+## ⭐ Support
 
-Edit `config.py` to customize:
-- Gemini model (`gemini-1.5-flash` by default)
-- Number of interview questions
-- Score weights
-- Common skills list for keyword matching
+If you found this helpful, please **star ⭐ this repository!**
+
+---
+
+## 👨‍💻 Developer
+
+**Rishabh Srivastava**
+- GitHub: [@rishabh71206](https://github.com/rishabh71206)
 
 ---
 
