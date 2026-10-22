@@ -149,7 +149,7 @@ def is_resume(text: str) -> tuple[bool, str]:
     Returns (is_valid, message)
     """
     if not text or len(text.strip()) < 50:
-        return False, "❌ Document bahut chota hai ya empty hai!"
+        return False, "❌ Document is too small or empty!"
 
     text_lower = text.lower()
 
@@ -165,6 +165,6 @@ def is_resume(text: str) -> tuple[bool, str]:
     found = [kw for kw in resume_keywords if kw in text_lower]
 
     if len(found) >= 2:
-        return True, "✅ Resume valid hai!"
+        return True, "✅ Resume is valid!"
     else:
-        return False, "⚠️ Yeh resume jaisa nahi lag raha! Kripya apna actual resume upload karein (PDF/DOCX)."
+        return False, "⚠️ This does not look like a resume! Please upload your actual resume (PDF/DOCX)."

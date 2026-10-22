@@ -55,7 +55,7 @@ def render():
     valid, msg = is_resume(resume_text)
     if not valid:
         st.error(msg)
-        st.warning("👆 Sahi resume upload karo — notes, assignments ya koi aur document kaam nahi karega!")
+        st.warning("👆 Please upload a valid resume — notes, assignments or other documents will not work!")
         return
     
 
