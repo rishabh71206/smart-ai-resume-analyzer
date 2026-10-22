@@ -6,7 +6,7 @@ import plotly.graph_objects as go
 import plotly.express as px
 import pandas as pd
 
-from utils.resume_parser import extract_text, extract_contact_info, extract_sections
+from utils.resume_parser import extract_text, extract_contact_info, extract_sections, is_resume
 from utils.ai_engine import analyze_resume, match_job_description
 from utils.scorer import compute_skill_score, compute_resume_completeness, weighted_overall_score
 from utils.pdf_report import generate_pdf_report
@@ -50,6 +50,14 @@ def render():
         resume_text = extract_text(uploaded_file)
         contact_info = extract_contact_info(resume_text)
         sections = extract_sections(resume_text)
+
+    # ── Validate document ─────────────────────────────────────────────────────
+    valid, msg = is_resume(resume_text)
+    if not valid:
+        st.error(msg)
+        st.warning("👆 Sahi resume upload karo — notes, assignments ya koi aur document kaam nahi karega!")
+        return
+    
 
     if show_raw_text:
         with st.expander("📝 Extracted Text", expanded=False):

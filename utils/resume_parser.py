@@ -141,3 +141,30 @@ def _match_section_header(line: str, headers: list[str]) -> Optional[str]:
         if clean == h or clean.startswith(h):
             return h
     return None
+
+
+def is_resume(text: str) -> tuple[bool, str]:
+    """
+    Check if the uploaded document looks like a resume.
+    Returns (is_valid, message)
+    """
+    if not text or len(text.strip()) < 50:
+        return False, "❌ Document bahut chota hai ya empty hai!"
+
+    text_lower = text.lower()
+
+    # Resume keywords
+    resume_keywords = [
+        "experience", "education", "skills", "work", "job", "project",
+        "resume", "cv", "objective", "summary", "employment", "degree",
+        "university", "college", "internship", "certification", "email",
+        "phone", "address", "linkedin", "github", "anubhav", "shiksha",
+        "kaushal", "pariyojana", "rozgar", "dakshata"
+    ]
+
+    found = [kw for kw in resume_keywords if kw in text_lower]
+
+    if len(found) >= 2:
+        return True, "✅ Resume valid hai!"
+    else:
+        return False, "⚠️ Yeh resume jaisa nahi lag raha! Kripya apna actual resume upload karein (PDF/DOCX)."
