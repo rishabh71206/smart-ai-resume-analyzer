@@ -5,7 +5,7 @@ Main Streamlit application entry point.
 import streamlit as st
 from config import APP_TITLE, APP_ICON, APP_LAYOUT, GEMINI_API_KEY
 
-# ── Page config — MUST be first Streamlit call ────────────────────────────────
+# ── Page config ───────────────────────────────────────────────────────────────
 st.set_page_config(
     page_title=APP_TITLE,
     page_icon=APP_ICON,
@@ -13,105 +13,134 @@ st.set_page_config(
     initial_sidebar_state="expanded",
 )
 
-# ── Custom CSS ────────────────────────────────────────────────────────────────
-st.markdown("""
-<style>
-/* Main background */
-.stApp { background-color: #ffffff; }
+# ── Theme toggle ──────────────────────────────────────────────────────────────
+if "dark_mode" not in st.session_state:
+    st.session_state["dark_mode"] = False
 
-/* All text dark */
-.stApp, .stApp p, .stApp div, .stApp span, .stApp label {
-    color: #111111 !important;
-}
+# ── CSS ───────────────────────────────────────────────────────────────────────
+dark = st.session_state["dark_mode"]
+
+bg_color     = "#1a1a2e" if dark else "#ffffff"
+text_color   = "#ffffff" if dark else "#111111"
+card_bg      = "#16213e" if dark else "#f8fafc"
+border_color = "#0f3460" if dark else "#e2e8f0"
+sub_text     = "#a0aec0" if dark else "#444444"
+
+st.markdown(f"""
+<style>
+/* Main */
+.stApp {{ background-color: {bg_color} !important; }}
+
+/* All text */
+.stApp, .stApp p, .stApp div, .stApp span,
+.stApp label, .stMarkdown p, .stMarkdown li {{
+    color: {text_color} !important;
+}}
 
 /* Headings */
-h1 { color: #1e3a5f !important; font-weight: 800 !important; }
-h2 { color: #1e3a5f !important; font-weight: 700 !important; }
-h3 { color: #2563eb !important; font-weight: 600 !important; }
+h1 {{ color: {'#60a5fa' if dark else '#1e3a5f'} !important; font-weight: 800 !important; }}
+h2 {{ color: {'#60a5fa' if dark else '#1e3a5f'} !important; font-weight: 700 !important; }}
+h3 {{ color: {'#93c5fd' if dark else '#2563eb'} !important; font-weight: 600 !important; }}
 
-/* Paragraph text */
-p, li, span {
-    color: #111111 !important;
-    font-size: 15px !important;
-}
-
-/* File uploader text */
+/* Labels */
 .stFileUploader label, .stTextInput label,
 .stTextArea label, .stSelectbox label,
 .stSlider label, .stMultiSelect label,
-.stCheckbox label, .stRadio label {
-    color: #111111 !important;
+.stCheckbox label, .stRadio label {{
+    color: {text_color} !important;
     font-weight: 600 !important;
     font-size: 15px !important;
-}
+}}
 
-/* Info/success/warning/error boxes */
-.stAlert p { color: #111111 !important; }
+/* Input boxes */
+.stTextInput input, .stTextArea textarea {{
+    background-color: {card_bg} !important;
+    color: {text_color} !important;
+    border: 1px solid {border_color} !important;
+}}
 
-/* Metric labels and values */
-[data-testid="metric-container"] {
-    background: white;
-    border: 1px solid #e2e8f0;
-    border-radius: 10px;
-    padding: 10px;
-    box-shadow: 0 1px 3px rgba(0,0,0,0.06);
-}
-[data-testid="metric-container"] label {
-    color: #444444 !important;
+/* Metric cards */
+div[data-testid="metric-container"] {{
+    background: {card_bg} !important;
+    border: 1px solid {border_color} !important;
+    border-radius: 10px !important;
+    padding: 10px !important;
+}}
+div[data-testid="metric-container"] label {{
+    color: {sub_text} !important;
     font-weight: 600 !important;
-}
-[data-testid="metric-container"] div {
-    color: #111111 !important;
+}}
+div[data-testid="metric-container"] div {{
+    color: {text_color} !important;
     font-weight: 700 !important;
-}
+}}
 
 /* Sidebar */
-[data-testid="stSidebar"] {
-    background: linear-gradient(180deg, #1e3a5f 0%, #2563eb 100%);
-}
-[data-testid="stSidebar"] * { color: white !important; }
+[data-testid="stSidebar"] {{
+    background: {'linear-gradient(180deg, #0f3460 0%, #16213e 100%)' if dark else 'linear-gradient(180deg, #1e3a5f 0%, #2563eb 100%)'} !important;
+}}
+[data-testid="stSidebar"] * {{ color: white !important; }}
 
-/* Primary button */
-.stButton > button[kind="primary"] {
-    background: linear-gradient(90deg, #2563eb, #7c3aed);
+/* Buttons */
+.stButton > button[kind="primary"] {{
+    background: linear-gradient(90deg, #2563eb, #7c3aed) !important;
     color: white !important;
-    border: none;
-    border-radius: 8px;
-    font-weight: 600;
-    font-size: 16px !important;
-}
+    border: none !important;
+    border-radius: 8px !important;
+    font-weight: 600 !important;
+    font-size: 15px !important;
+}}
+.stButton > button {{
+    color: {text_color} !important;
+    background: {card_bg} !important;
+    border: 1px solid {border_color} !important;
+}}
 
 /* Tabs */
-.stTabs [data-baseweb="tab-list"] {
-    gap: 8px;
-    background: #f0f4f8;
-    border-radius: 8px;
-    padding: 4px;
-}
-.stTabs [data-baseweb="tab"] {
-    border-radius: 6px;
+.stTabs [data-baseweb="tab-list"] {{
+    background: {card_bg} !important;
+    border-radius: 8px !important;
+    padding: 4px !important;
+}}
+.stTabs [data-baseweb="tab"] {{
+    color: {text_color} !important;
     font-weight: 600 !important;
-    color: #111111 !important;
-}
+}}
+
+/* Alert boxes */
+.stAlert p {{ color: #111111 !important; }}
 
 /* Expander */
-.streamlit-expanderHeader {
+.streamlit-expanderHeader {{
+    color: {text_color} !important;
     font-weight: 700 !important;
-    color: #111111 !important;
-}
+    background: {card_bg} !important;
+}}
 
-/* Markdown text */
-.stMarkdown p { color: #111111 !important; }
-.stMarkdown li { color: #111111 !important; }
+/* Select boxes */
+.stSelectbox div[data-baseweb="select"] {{
+    background: {card_bg} !important;
+}}
 </style>
 """, unsafe_allow_html=True)
 
 # ── Import pages ──────────────────────────────────────────────────────────────
-from pages import resume_analyzer, interview_bot, career_advisor, tips_resources
+from pages import (resume_analyzer, interview_bot, career_advisor,
+                   tips_resources, chatbot, job_recommendations,
+                   resume_comparison, resume_builder)
 
-# ── Sidebar navigation ────────────────────────────────────────────────────────
+# ── Sidebar ───────────────────────────────────────────────────────────────────
 with st.sidebar:
-    st.markdown(f"# {APP_ICON} {APP_TITLE}")
+    st.markdown(f"# {APP_ICON} Smart AI")
+    st.markdown("### Resume Analyzer & Bot")
+    st.markdown("---")
+
+    # Dark/Light mode toggle
+    mode_label = "☀️ Light Mode" if dark else "🌙 Dark Mode"
+    if st.button(mode_label, use_container_width=True):
+        st.session_state["dark_mode"] = not dark
+        st.rerun()
+
     st.markdown("---")
 
     page = st.radio(
@@ -120,6 +149,10 @@ with st.sidebar:
             "📄 Resume Analyzer",
             "🤖 Interview Bot",
             "🚀 Career Advisor",
+            "💬 AI Chatbot",
+            "🎯 Job Recommendations",
+            "👥 Resume Comparison",
+            "🎨 Resume Builder",
             "📚 Tips & Resources",
         ],
         label_visibility="collapsed",
@@ -129,32 +162,34 @@ with st.sidebar:
 
     # API key status
     if GEMINI_API_KEY:
-        st.success("✅ Gemini API Connected")
+        st.success("✅ AI Connected")
     else:
-        st.error("❌ Gemini API Key Missing")
-        st.markdown("""
-**To set up:**
-1. Get a free key at [Google AI Studio](https://aistudio.google.com/)
-2. Create a `.env` file in the project root
-3. Add: `GEMINI_API_KEY=your_key_here`
-4. Restart the app
-""")
+        st.error("❌ API Key Missing")
+        st.markdown("Add `GEMINI_API_KEY` in Streamlit Secrets!")
 
     st.markdown("---")
     st.markdown("""
 <small>
 <b>Smart AI Resume Analyzer</b><br>
-Powered by Google Gemini AI<br><br>
-© 2024 – Built with Streamlit & Python
+Powered by Google Gemini AI<br>
+© 2024 – Built with Python
 </small>
 """, unsafe_allow_html=True)
 
-# ── Render selected page ──────────────────────────────────────────────────────
+# ── Render page ───────────────────────────────────────────────────────────────
 if page == "📄 Resume Analyzer":
     resume_analyzer.render()
 elif page == "🤖 Interview Bot":
     interview_bot.render()
 elif page == "🚀 Career Advisor":
     career_advisor.render()
+elif page == "💬 AI Chatbot":
+    chatbot.render()
+elif page == "🎯 Job Recommendations":
+    job_recommendations.render()
+elif page == "👥 Resume Comparison":
+    resume_comparison.render()
+elif page == "🎨 Resume Builder":
+    resume_builder.render()
 elif page == "📚 Tips & Resources":
     tips_resources.render()
