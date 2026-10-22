@@ -17,55 +17,92 @@ st.set_page_config(
 st.markdown("""
 <style>
 /* Main background */
-.stApp { background-color: #f0f4f8; }
+.stApp { background-color: #ffffff; }
 
-/* Sidebar */
-[data-testid="stSidebar"] {
-    background: linear-gradient(180deg, #1e3a5f 0%, #2563eb 100%);
+/* All text dark */
+.stApp, .stApp p, .stApp div, .stApp span, .stApp label {
+    color: #111111 !important;
 }
-[data-testid="stSidebar"] * { color: white !important; }
-[data-testid="stSidebar"] .stSelectbox label,
-[data-testid="stSidebar"] .stCheckbox label { color: white !important; }
 
-/* Cards */
-div[data-testid="metric-container"] {
+/* Headings */
+h1 { color: #1e3a5f !important; font-weight: 800 !important; }
+h2 { color: #1e3a5f !important; font-weight: 700 !important; }
+h3 { color: #2563eb !important; font-weight: 600 !important; }
+
+/* Paragraph text */
+p, li, span {
+    color: #111111 !important;
+    font-size: 15px !important;
+}
+
+/* File uploader text */
+.stFileUploader label, .stTextInput label,
+.stTextArea label, .stSelectbox label,
+.stSlider label, .stMultiSelect label,
+.stCheckbox label, .stRadio label {
+    color: #111111 !important;
+    font-weight: 600 !important;
+    font-size: 15px !important;
+}
+
+/* Info/success/warning/error boxes */
+.stAlert p { color: #111111 !important; }
+
+/* Metric labels and values */
+[data-testid="metric-container"] {
     background: white;
     border: 1px solid #e2e8f0;
     border-radius: 10px;
     padding: 10px;
     box-shadow: 0 1px 3px rgba(0,0,0,0.06);
 }
+[data-testid="metric-container"] label {
+    color: #444444 !important;
+    font-weight: 600 !important;
+}
+[data-testid="metric-container"] div {
+    color: #111111 !important;
+    font-weight: 700 !important;
+}
+
+/* Sidebar */
+[data-testid="stSidebar"] {
+    background: linear-gradient(180deg, #1e3a5f 0%, #2563eb 100%);
+}
+[data-testid="stSidebar"] * { color: white !important; }
 
 /* Primary button */
 .stButton > button[kind="primary"] {
     background: linear-gradient(90deg, #2563eb, #7c3aed);
-    color: white;
+    color: white !important;
     border: none;
     border-radius: 8px;
     font-weight: 600;
+    font-size: 16px !important;
 }
 
 /* Tabs */
 .stTabs [data-baseweb="tab-list"] {
     gap: 8px;
-    background: white;
+    background: #f0f4f8;
     border-radius: 8px;
     padding: 4px;
 }
 .stTabs [data-baseweb="tab"] {
     border-radius: 6px;
-    font-weight: 500;
+    font-weight: 600 !important;
+    color: #111111 !important;
 }
 
 /* Expander */
 .streamlit-expanderHeader {
-    font-weight: 600;
-    background: white;
-    border-radius: 8px;
+    font-weight: 700 !important;
+    color: #111111 !important;
 }
 
-h1 { color: #1e3a5f; }
-h2, h3 { color: #2563eb; }
+/* Markdown text */
+.stMarkdown p { color: #111111 !important; }
+.stMarkdown li { color: #111111 !important; }
 </style>
 """, unsafe_allow_html=True)
 
