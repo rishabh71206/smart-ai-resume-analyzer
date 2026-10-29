@@ -1,14 +1,31 @@
+# Secrets and local configuration
 .env
+.streamlit/secrets.toml
+
+# Python
 __pycache__/
-*.pyc
-*.pyo
-.DS_Store
+*.py[cod]
 *.egg-info/
 dist/
 build/
 .venv/
 venv/
 env/
+
+# Tooling caches
+.pytest_cache/
+.ruff_cache/
+.mypy_cache/
+htmlcov/
+.coverage
+
+# Generated files
 uploads/
-*.pdf
-*.docx
+*.log
+docs/*.pdf
+
+# OS / editor
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/

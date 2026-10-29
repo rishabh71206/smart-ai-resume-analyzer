@@ -1,0 +1,35 @@
+Rishabh Srivastava
+rishabhsrivastava712008@gmail.com | +91 98765 43210
+linkedin.com/in/rishabh-srivastava | github.com/rishabh71206
+https://rishabh71206.github.io/rishabh-srivastava-portfolio/
+
+Summary
+Python developer with 2 years of experience building AI products, automation tools and
+Streamlit dashboards. Comfortable owning a problem from data ingestion to deployment.
+
+Experience
+Software Developer, Acme Labs, 2023 - Present
+- Built REST APIs with Django and PostgreSQL, reducing p95 response time by 35%.
+- Automated weekly reporting with pandas and Plotly, saving 6 hours per week.
+- Containerised services with Docker and added CI checks, cutting release failures by 40%.
+
+Data Analyst Intern, Beta Corp, 2022 - 2023
+- Analysed 1M+ rows of sales data with SQL and pandas to guide pricing decisions.
+- Built an interactive Plotly dashboard used by 25+ stakeholders.
+
+Projects
+Smart AI Resume Analyzer
+- Built an 8-module Streamlit app with Google Gemini and a deterministic offline fallback.
+- Added ATS scoring, job-description matching, mock interviews and PDF reports.
+Portfolio Website
+- Designed and shipped a responsive portfolio with 100 Lighthouse accessibility and SEO scores.
+
+Education
+B.Tech Computer Science, ABC University, 2018 - 2022, CGPA 8.5/10
+
+Skills
+Python, SQL, Django, PostgreSQL, Docker, AWS, Git, pandas, NumPy, Plotly, Streamlit,
+Machine Learning, REST API, CI/CD, Communication, Problem Solving
+
+Certifications
+AWS Certified Cloud Practitioner
